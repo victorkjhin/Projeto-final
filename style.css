@@ -1,0 +1,33 @@
+body {
+  background-image: url("./Ibagens/maos-de-medico.jpg"); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+.navbar-purple {
+  background-color: #0d88ad; 
+}
+
+.navbar-purple .navbar-brand {
+  color: white; 
+}
+
+.table tbody tr {
+    display: table-row; /* mantém células alinhadas */
+    background-color: #d0f7ff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-bottom: 10px;
+}
+
+.table td {
+    padding: 10px 12px;
+    vertical-align: middle;
+}
+
+.table td button, .table td a.btn {
+    margin-left: 5px;
+}
+
