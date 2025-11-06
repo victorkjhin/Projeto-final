@@ -117,6 +117,4 @@ if(isset($_POST['delete_medico'])){
     }
 }
 
-
-
 ?>
