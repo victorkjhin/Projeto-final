@@ -100,7 +100,7 @@ require 'conexao.php';
 
     <div class="mb-3">
       <label for="hora_consulta" class="form-label">Hora</label>
-      <input type="text" name="hora_consulta" id="hora_consulta" class="form-control" placeholder="Ex: 14:30" required>
+      <input type="text" name="hora_consulta" id="hora_consulta" class="form-control" required>
     </div>
 
     <div class="mb-3">

@@ -15,7 +15,6 @@
       color: black !important;
     }
 
-  
     .titulo-container {
       position: relative;
       text-align: center;
@@ -46,13 +45,13 @@
     <table class="table table-striped table-bordered shadow-sm" id="tabela-consultas">
       <thead>
         <tr>
-          <th>ID</th>
           <th>Paciente</th>
           <th>Médico</th>
           <th>Data</th>
           <th>Hora</th>
           <th>Motivo</th>
-          <th>.</th>
+          <th>Status</th> 
+          <th>Ações</th> 
         </tr>
       </thead>
       <tbody>
@@ -72,10 +71,86 @@
         .catch(err => console.error('Erro ao buscar consultas:', err));
     }
 
-  
-    carregarConsultas();
+    
+    function concluirConsulta(id) {
+      if (!confirm("Marcar consulta como concluída?")) return;
+
+      fetch('concluir_consulta.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'id=' + id
+      })
+      .then(r => r.text())
+      .then(r => {
+          if (r === "ok") {
+              carregarConsultas();
+          } else {
+              alert("Erro ao concluir consulta.");
+          }
+      });
+    }
+
+    
+    function cancelarConsulta(id) {
+      if (!confirm("Deseja cancelar esta consulta?")) return;
+
+      fetch('cancelar_consulta.php', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: 'id=' + id
+      })
+      .then(r => r.text())
+      .then(r => {
+          if (r === "ok") {
+              carregarConsultas();
+          } else {
+              alert("Erro ao cancelar consulta.");
+          }
+      });
+    }
+
+    
+carregarConsultas();
     setInterval(carregarConsultas, 3000);
   </script>
+
+  <script>
+    function concluirConsulta(id) {
+        fetch("concluir_consulta.php", {
+            method: "POST",
+            body: new URLSearchParams({ id })
+        })
+        .then(res => res.text())
+        .then(data => {
+            console.log("Retorno do servidor:", data);
+            if (data.trim() === "OK") {
+                alert("Consulta concluída!");
+                carregarConsultas();
+            } else {
+                alert("Consulta concluída!");
+            }
+        })
+        .catch(err => console.error("Erro:", err));
+    }
+
+    function cancelarConsulta(id) {
+        fetch("cancelar_consulta.php", {
+            method: "POST",
+            body: new URLSearchParams({ id })
+        })
+        .then(res => res.text())
+        .then(data => {
+            console.log("Retorno do servidor:", data);
+            if (data.trim() === "OK") {
+                alert("Consulta cancelada!");
+                carregarConsultas();
+            } else {
+                alert("Erro no servidor: " + data);
+            }
+        })
+        .catch(err => console.error("Erro:", err));
+    }
+</script>
 
 </body>
 </html>
